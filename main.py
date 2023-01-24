@@ -5,7 +5,7 @@ from index.utils import extract_urls, save_index_to_json
 
 if __name__=="__main__":
     urls = extract_urls()
-    urls = urls[:50]
+    urls = urls[30:40]
     index = Index(urls)
     index.get_iverse_index()
     print(index.get_stats())

@@ -2,7 +2,7 @@ from typing import List
 import string
 
 from index.utils import download_url, extract_titles_from_html, flatten
-
+from copy import deepcopy
 
 class Index():
     def __init__(self,urls:List[str]) -> None:
@@ -36,20 +36,20 @@ class Index():
                 token_titles = []
                 for title in titles :
                     token_titles+=self.tokenize(title)
-                j = 0
                 for token in token_titles :
                     # Si le token n'est pas dans l'index
                     if token not in self.index.keys():
                         self.index[token]= [{i:1}]
-                        self.known_urls[token] = {i : j}
-                        j+=1
+                        self.known_urls[token] = {i : len(self.index[token])-1}
                     # Si le token est dans l'index mais n'est pas apparu dans le document i
-                    elif url not in self.known_urls[token].keys() :
+                    elif i not in self.known_urls[token].keys() :
+                        print(self.known_urls[token].keys())
                         self.index[token].append({i:1})
-                        self.known_urls[token][i] = j
-                        j+=1
+                        self.known_urls[token][i] = len(self.index[token])-1
                     else :
-                        self.index[token][self.known_urls[i]][i] += 1
+                        print(self.index[token])
+                        print(token,self.known_urls[token][i])
+                        self.index[token][self.known_urls[token][i]][i] += 1
 
                 
     
