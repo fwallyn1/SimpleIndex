@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 import string
 
 from index.utils import download_url, extract_titles_from_html, flatten
@@ -22,7 +22,7 @@ class Index():
         return token_title        
 
 
-    def get_iverse_index(self):
+    def create_iverse_index(self) -> None:
         for i,url in enumerate(self.urls):
             print(i,url)
             #print(self.index)
@@ -50,8 +50,9 @@ class Index():
                         print(self.index[token])
                         print(token,self.known_urls[token][i])
                         self.index[token][self.known_urls[token][i]][i] += 1
-
-                
+    
+    def get_inverse_index(self) -> Dict:
+        return self.index
     
     def get_stats(self):
         self.stats["mean_token_per_doc"] = self.stats["n_token"]/self.stats["n_token"] if self.stats["n_token"]!=0 else 0
