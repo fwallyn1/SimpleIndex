@@ -11,7 +11,7 @@ import os
 def main(export_path_directory,export_filename,path_to_urls_json):
     urls = extract_urls(path_to_urls_json)
      #### Non Positional Index ####
-    urls = urls
+    urls = urls[:10]
     non_pos_index = NonPosIndex(urls)
     non_pos_index.create_inverse_index()
     reverse_index = non_pos_index.get_inverse_index()

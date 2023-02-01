@@ -42,12 +42,9 @@ class NonPosIndex():
                         self.known_urls[token] = {i : len(self.index[token])-1}
                     # Si le token est dans l'index mais n'est pas apparu dans le document i
                     elif i not in self.known_urls[token].keys() :
-                        print(self.known_urls[token].keys())
                         self.index[token].append({i:1})
                         self.known_urls[token][i] = len(self.index[token])-1
                     else :
-                        print(self.index[token])
-                        print(token,self.known_urls[token][i])
                         self.index[token][self.known_urls[token][i]][i] += 1
     
     def get_inverse_index(self) -> Dict:
